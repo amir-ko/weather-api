@@ -1,0 +1,147 @@
+body{
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+*{
+
+    box-sizing: border-box;
+}
+.brand{
+    text-transform: capitalize;
+}
+h1,h3{
+    font-weight: 400;
+}
+.video{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.weather{
+    min-height: 100vh;
+    background-color: rgb(85, 125, 125);
+    position: relative;
+    transition: 500ms;
+    opacity: 1;
+    color: #fff;
+}
+.weather::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 2em 3em 4em 3em;
+}
+.container>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.temp,.weath{
+    margin: 0 20px;
+}
+.city > h1{
+    margin: 10px;
+    margin-bottom: 0.2em;
+    font-size: 48px;
+}
+.temp{
+    font-size: 72px;
+    margin: 0;
+}
+
+.panel{
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: rgba(110, 110, 110, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    z-index: 1;
+    padding: 48px 32px;
+    overflow-y: scroll;
+    overflow: hidden;
+}
+.panel form{
+    margin-bottom: 48px;
+}
+.local button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    margin: 35px 120px;
+    border: none;
+    outline: none;
+    background: #fa6d1b00;
+    color: #000000;
+    cursor: pointer;
+    font-size: 10px;
+    transition: 0.4s;
+}
+.local button:hover{
+    background: #fff !important;
+    color: #0000;
+}
+.local input{
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0 16px 8px 0;
+    width: 80%;
+    color: #000000;
+    font-size: 17px;
+}
+.local input:focus{
+    outline: none;
+}
+.local input::placeholder{
+    color: #000000;
+}
+.panel ul{
+    padding: 0 0 16px 0;
+    border-bottom: 1px solid #ccc;
+    margin: 32px 0;
+}
+.panel ul li{
+    color: #000000;
+    margin: 40px;
+}
+.panel ul h4{
+    margin: 48px 0;
+}
+
+.details li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.details h4{
+    text-transform: capitalize;
+    color: #000000;
+}
+.error{
+    text-align: center;
+    color: black;
+    display: none;
+}

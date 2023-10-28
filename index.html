@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="master.css" />
+    <link rel="stylesheet" href="global.css" />
+  </head>
+  <body>
+    <div class="weather">
+      <video src="video/Snow.mp4" class="video" autoplay loop muted  ></video>
+      <div class="container">
+        <h3 class="brand">the weather</h3>
+        <div>
+          <h1 class="temp">16°c</h1>
+          <div class="city">
+            <h1 class="name">London</h1>
+          </div>
+          <div class="weath">
+            <span class="condition">Cloudy</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="local">
+          <input type="text"  placeholder="search location..." />
+          <button>
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <div class="error">
+          <p>
+            Please enter a valid city or zip code to find the weather in your area!
+          </p>
+        </div>
+
+        <ul class="details">
+          <h4>weather details</h4>
+          <li>
+            <span>Cloudy</span>
+            <span class="cloud">89%</span>
+          </li>
+          <li>
+            <span>Humidity</span>
+            <span class="humidity">64%</span>
+          </li>
+          <li>
+            <span>Wind</span>
+            <span class="wind">8km/h</span>
+          </li>
+          <li>
+            <span>Pressure</span>
+            <span class="pressure">75kpa</span>
+          </li>
+          <li>
+            <span>Country</span>
+            <span class="country">UK</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    const Apikey = "4f596a073a8e0637b1ca9e37cd3c8fd3";
+    const Apiurl ="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+      
+    const searchbox = document.querySelector(".local input");
+    
+    const searchbtn = document.querySelector(".local button");
+    const vid = document.querySelector(".video");
+    async function weather(name) {
+      const res = await fetch(Apiurl + name + `&appid=${Apikey}`)
+
+
+      if(res.status == 404){
+        document.querySelector(".error").style.display = "block"
+      } 
+      else{
+      const data = await res.json();
+      
+      console.log(data);
+      document.querySelector(".pressure").innerHTML = data.main.pressure + "kpa";
+      document.querySelector(".country").innerHTML = data.sys.country;
+      document.querySelector('.condition').innerHTML = data.weather[0].description;
+      document.querySelector(".cloud").innerHTML = data.clouds.all + "%";
+      document.querySelector(".name").innerHTML = data.name;
+      document.querySelector(".temp").innerHTML =Math.round(data.main.temp) + "°c";
+      document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+      document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+
+      if(data.weather[0].main == "Clouds"){
+        vid.src = "video/clouds.mp4";
+      }
+      else if(data.weather[0].main == "Clear"){
+        vid.src = "video/clear sky.mp4";
+      }
+      else if(data.weather[0].main == "Rain"){
+        vid.src = "video/rain.mp4";
+      }
+      else if(data.weather[0].main == "Drizzle"){
+        vid.src = "video/drizzle.mp4";
+      }
+      else if(data.weather[0].main == "Mist"){
+        vid.src = "video/mist.mp4";
+      }
+      else if(data.weather[0].main == "Snow"){
+        vid.src = "video/snow.mp4";
+      }
+      document.querySelector(".error").style.display = "none"
+      }   
+
+    }
+    searchbtn.addEventListener("click", () => {
+      weather(searchbox.value)
+      
+    })
+  </script>
+</html>
